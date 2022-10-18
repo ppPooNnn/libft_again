@@ -6,7 +6,7 @@
 #    By: puttasa <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/04 17:43:45 by puttasa           #+#    #+#              #
-#    Updated: 2022/10/12 19:35:47 by puttasa          ###   ########.fr        #
+#    Updated: 2022/10/18 13:02:53 by puttasa          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,23 +25,23 @@ OBJSB = $(SRCSB:.c=.o)
 all : $(NAME)
 
 .c.o :
-	echo "\033[93mCompiling $< to $@...\033[0m"	
-	gcc $(FLAGS) -c $< -o $(<:.c=.o)
+	@echo "\033[93mCompiling $< to $@...\033[0m"	
+	@gcc $(FLAGS) -c $< -o $(<:.c=.o)
 
 $(NAME) : $(OBJS)
-	echo "\033[93mMaking .a file...\033[0m"
-	ar -rcs $(NAME) $(OBJS)
+	@echo "\033[93mMaking .a file...\033[0m"
+	@ar -rcs $(NAME) $(OBJS)
 
 bonus : $(NAME) $(OBJSB)
-		echo "\033[93mMaking bonus\033[0m"
-		ar -rcs $(NAME) $(OBJSB)
+		@echo "\033[93mMaking bonus\033[0m"
+		@ar -rcs $(NAME) $(OBJSB)
 
 clean :
-	echo "\033[93mCleaning objects...\033[0m"
-	rm -f $(OBJS) $(OBJSB)
+	@echo "\033[93mCleaning objects...\033[0m"
+	@rm -f $(OBJS) $(OBJSB)
 
 fclean : clean
-	rm -f $(NAME) $(bonus)
+	@rm -f $(NAME) $(bonus)
 
 re : fclean all
 
