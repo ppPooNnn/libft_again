@@ -6,7 +6,7 @@
 /*   By: puttasa <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 18:21:07 by puttasa           #+#    #+#             */
-/*   Updated: 2022/10/19 18:35:27 by puttasa          ###   ########.fr       */
+/*   Updated: 2022/10/20 15:30:27 by puttasa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	char	*new;
 
 	i = 0;
+	if (!s)
+		return (0);
 	if (start >= ft_strlen(s))
 		return (ft_calloc(1, 1));
 	if (ft_strlen(s) - start < len)
