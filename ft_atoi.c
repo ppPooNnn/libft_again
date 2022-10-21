@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: puttasa <puttasa@student.42.fr>            +#+  +:+       +#+        */
+/*   By: puttasa <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/19 14:31:59 by puttasa           #+#    #+#             */
-/*   Updated: 2022/10/21 18:23:33 by puttasa          ###   ########.fr       */
+/*   Created: 2022/10/21 18:24:34 by puttasa           #+#    #+#             */
+/*   Updated: 2022/10/21 18:32:07 by puttasa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,25 +14,29 @@
 
 int	ft_atoi(const char *str)
 {
-	int	sign;
+	int	check;
 	int	res;
+	int	sign;
 
 	sign = 1;
 	res = 0;
+	check = 0;
 	while ((*str >= '\t' && *str <= '\r') || *str == ' ')
 		str++;
-	if (*str == '-')
+	if (*str == '-' || *str == '+')
 	{
-		sign = -1;
+		if (*str == '-')
+			sign *= -1;
+		check = 1;
 		str++;
 	}
 	if (*str == '-' || *str == '+')
 	{
-		if (*(str - 1) == '-' || *(str - 1) == '+')
+		if (check == 1)
 			return (0);
 		str++;
 	}
-	while ((*str >= '0' && *str <= '9'))
+	while (*str >= '0' && *str <= '9')
 	{
 		res = (res * 10) + *str - '0';
 		str++;
