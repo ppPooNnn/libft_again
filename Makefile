@@ -6,7 +6,7 @@
 #    By: puttasa <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/04 17:43:45 by puttasa           #+#    #+#              #
-#    Updated: 2022/10/21 15:35:18 by puttasa          ###   ########.fr        #
+#    Updated: 2022/10/22 02:18:07 by puttasa          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,4 +45,8 @@ fclean : clean
 
 re : fclean all
 
-.PHONY : all clean fclean re bonus
+so:
+	gcc -nostartfiles -fPIC $(FLAGS) $(SRCS) $(SRCSB)
+	gcc -nostartfiles -shared -o libft.so $(OBJS) $(OBJSB)
+
+.PHONY : all clean fclean re bonus so
