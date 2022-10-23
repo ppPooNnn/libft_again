@@ -5,14 +5,14 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: puttasa <puttasa@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/22 19:59:07 by puttasa           #+#    #+#             */
-/*   Updated: 2022/10/22 20:27:38 by puttasa          ###   ########.fr       */
+/*   Created: 2022/10/23 22:44:38 by puttasa           #+#    #+#             */
+/*   Updated: 2022/10/23 22:49:44 by puttasa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_numsize(int n)
+int	ft_checksize(int n)
 {
 	int	size;
 
@@ -22,22 +22,24 @@ int	ft_numsize(int n)
 	while (n)
 	{
 		size++;
-		n = n / 10;
+		n /= 10;
 	}
 	return (size);
 }
 
 char	*ft_itoa(int n)
 {
-	int		size;
-	long	num;
 	char	*new;
+	long	num;
+	int		len;
 
 	num = n;
-	size = ft_numsize(num);
-	new = malloc(size + 1);
+	len = ft_checksize(n);
+	new = malloc(len + 1);
 	if (!new)
 		return (0);
+	new[len] = '\0';
+	len--;
 	if (num < 0)
 	{
 		new[0] = '-';
@@ -45,13 +47,11 @@ char	*ft_itoa(int n)
 	}
 	if (num == 0)
 		new[0] = '0';
-	new[size] = '\0';
-	size--;
 	while (num)
 	{
-		new[size] = (num % 10) + '0';
+		new[len] = num % 10 + '0';
+		len--;
 		num = num / 10;
-		size--;
 	}
 	return (new);
 }
