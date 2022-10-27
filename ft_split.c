@@ -3,21 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: puttasa <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: puttasa <puttasa@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/25 15:32:56 by puttasa           #+#    #+#             */
-/*   Updated: 2022/10/25 18:18:55 by puttasa          ###   ########.fr       */
+/*   Created: 2022/10/27 11:49:24 by puttasa           #+#    #+#             */
+/*   Updated: 2022/10/27 11:59:58 by puttasa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int	count_substring(char const *s, char c)
+static int	ft_substrcount(char const *s, char c)
 {
 	int	count;
 
 	count = 0;
-	while(*s)
+	while (*s)
 	{
 		while (*s == c && *s)
 			s++;
@@ -29,42 +29,55 @@ static int	count_substring(char const *s, char c)
 	return (count);
 }
 
-static int	substringlen(char const *s, char c)
+static int	ft_substrlen(char const *s, char c)
 {
 	int	len;
 
 	len = 0;
-	while (*s != c)
-	{
-		s++;
+	while (s[len] != c && s[len])
 		len++;
-	}
 	return (len);
 }
 
-/*
-char	**ft_split(char const *s, char c)
+static char	*ft_substrcpy(char const *s, char c)
 {
+	int	len;
 	int	i;
-	int	count;
-	char	**new;
-	char	buffer[16384];
+	char	*new;
 
 	i = 0;
-	if (s)
+	len = ft_substrlen(s, c);
+	new = malloc(len + 1);
+	if (!new)
 		return (0);
-	count = count_substring(s, c);
+	while (i < len && *s)
+		new[i++] = *s++;
+	new[i] = '\0';
+	return (new);
+}
+
+char	**ft_split(char const *s, char c)
+{
+	int	count;
+	int	i;
+	char	**new;
+
+	i = 0;
+	if (!s)
+		return (0);
+	count = ft_substrcount(s, c);
 	new = malloc(sizeof(char *) * count + 1);
 	if (!new)
 		return (0);
-}
-*/
-int	main()
-{
-	char	*s = "i,try,to,do,split,again";
-	char	c = ',';
-	int	count;
-	char	*new = join_substring(s, c);
-
-	count = count_substring(s, c);
+	while (*s)
+	{
+		while (*s == c && *s)
+			s++;
+		if (*s != c && *s)
+			new[i++] = ft_substrcpy(s, c);
+		while (*s != c && *s)
+			s++;
+	}
+	new[i] = '\0';
+	return (new);
 }
